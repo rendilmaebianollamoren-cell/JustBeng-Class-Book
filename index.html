@@ -112,11 +112,55 @@ body[data-theme="wood"] .days input:checked+span{background:#eee1d1;color:#76503
 .profile h2{font-size:22px;margin:6px 0;}
 .profile p{font-size:15px;}
 </style>
+<style id="firebase-auth-styles">
+.auth-gate{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#fff7fc,#f6ecfa);overflow:auto}
+.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 24px 70px rgba(80,35,90,.18)}
+.auth-brand{text-align:center;margin-bottom:20px}.auth-brand .auth-mark{width:64px;height:64px;margin:0 auto 12px;border-radius:18px;background:linear-gradient(135deg,var(--pink),var(--purple));display:grid;place-items:center;color:#fff;font-size:30px;font-weight:900;box-shadow:0 10px 25px #d9289b33}.auth-brand h1{margin:0;color:#3a2444;font-size:26px}.auth-brand p{margin:7px 0 0;color:var(--muted);font-size:14px}
+.auth-card h2{margin:0 0 6px}.auth-subtitle{color:var(--muted);font-size:14px;margin:0 0 18px}.auth-form{display:grid;gap:12px}.auth-form label{font-size:13px;font-weight:800;color:#5d4966}.auth-form input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font-size:15px;outline:none}.auth-form input:focus{border-color:var(--pink);box-shadow:0 0 0 3px #d9289b18}.auth-error{display:none;padding:11px 12px;border-radius:11px;background:#fff0f1;color:#b23a49;font-size:13px;font-weight:700}.auth-info{display:none;padding:11px 12px;border-radius:11px;background:#f3efff;color:#5b2b7d;font-size:13px;font-weight:700}.auth-links{display:flex;justify-content:space-between;gap:10px;margin-top:4px}.auth-link{border:0;background:transparent;color:var(--pink);font-weight:800;cursor:pointer;padding:4px 0}.auth-config-note{margin-top:18px;padding:12px;border-radius:12px;background:#fff8e9;color:#795e1d;font-size:12px;line-height:1.5}.auth-config-note code{font-family:Consolas,monospace}
+.auth-user{font-size:11px;color:#ffd4ee;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:6px}.logout-btn{width:100%;margin-top:10px}
+body.auth-loading .app{visibility:hidden}
+@media(max-width:700px){.auth-card{padding:22px}.auth-gate{padding:14px}}
+</style>
 </head>
-<body>
+<body class="auth-loading">
+<div class="auth-gate" id="authGate">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="auth-mark">JB</div>
+      <h1>JustBeng Class Book</h1>
+      <p>Your class schedule, available on every device.</p>
+    </div>
+    <div id="loginView">
+      <h2>Welcome back</h2>
+      <p class="auth-subtitle">Sign in to sync your Class-Book across your devices.</p>
+      <form class="auth-form" onsubmit="loginUser(event)">
+        <div><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+        <div><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" required placeholder="Your password"></div>
+        <div class="auth-error" id="authError"></div>
+        <div class="auth-info" id="authInfo"></div>
+        <button class="primary" type="submit" id="loginBtn">Log In</button>
+        <div class="auth-links"><button type="button" class="auth-link" onclick="showSignup()">Create Account</button><button type="button" class="auth-link" onclick="resetPassword()">Forgot Password?</button></div>
+      </form>
+    </div>
+    <div id="signupView" style="display:none">
+      <h2>Create your account</h2>
+      <p class="auth-subtitle">Use this same account on your phone, tablet, and computer.</p>
+      <form class="auth-form" onsubmit="signupUser(event)">
+        <div><label for="signupEmail">Email</label><input id="signupEmail" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+        <div><label for="signupPassword">Password</label><input id="signupPassword" type="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters"></div>
+        <div><label for="signupPassword2">Confirm Password</label><input id="signupPassword2" type="password" autocomplete="new-password" minlength="6" required placeholder="Repeat your password"></div>
+        <div class="auth-error" id="signupError"></div>
+        <button class="primary" type="submit" id="signupBtn">Create Account</button>
+        <div class="auth-links"><button type="button" class="auth-link" onclick="showLogin()">← Back to Log In</button></div>
+      </form>
+    </div>
+    <div class="auth-config-note" id="authConfigNote"><strong>One-time Firebase setup:</strong> If you see a Firebase configuration message here, open <strong>Project settings → General → Your apps → Web app</strong> in Firebase and paste the provided config into <code>index.html</code>.</div>
+  </div>
+</div>
+
 <div class="app">
 <aside class="sidebar">
-  <div class="profile"><div class="avatar" id="avatar">MB</div><h2 id="profileName">Ma'am Beng</h2><p id="profileRole">Private Class Teacher</p><button class="ghost" style="margin-top:12px" onclick="openProfile()">✎ Edit Profile</button></div>
+  <div class="profile"><div class="avatar" id="avatar"></div><h2 id="profileName"></h2><p id="profileRole"></p><div class="auth-user" id="authUserEmail"></div><button class="ghost" style="margin-top:12px" onclick="openProfile()">✎ Edit Profile</button><button class="ghost logout-btn" onclick="logoutUser()">↪ Log Out</button></div>
   <nav class="nav">
     <button class="active" onclick="showSection('dashboard')"><span>▣</span>Dashboard</button>
     <button onclick="openBooking()"><span>▣</span>Book a Class</button>
@@ -161,15 +205,181 @@ body[data-theme="wood"] .days input:checked+span{background:#eee1d1;color:#76503
 <div class="modal" id="profileModal"><div class="modal-card" style="max-width:480px"><div class="modal-head"><h2>Edit Profile</h2><button class="close" onclick="closeProfile()">×</button></div><form class="form" onsubmit="saveProfile(event)"><div class="field full"><label>Teacher Name</label><input id="pName" value="" placeholder=""></div><div class="field full"><label>Bio</label><input id="pRole" value="" placeholder=""></div><div class="field full"><label>Profile Picture</label><input id="pPhoto" type="file" accept="image/*"><small style="color:var(--muted)">Choose any JPG, PNG, WEBP, GIF, or other image supported by your browser.</small></div><div class="field full"><label>Theme Color</label><div class="theme-picker" id="themePicker"><button type="button" class="theme-option" data-theme="violet" onclick="selectTheme('violet')"><span class="theme-dot violet"></span>Violet</button><button type="button" class="theme-option" data-theme="pink" onclick="selectTheme('pink')"><span class="theme-dot pink"></span>Pink</button><button type="button" class="theme-option" data-theme="green" onclick="selectTheme('green')"><span class="theme-dot green"></span>Green</button><button type="button" class="theme-option" data-theme="red" onclick="selectTheme('red')"><span class="theme-dot red"></span>Red</button><button type="button" class="theme-option" data-theme="black" onclick="selectTheme('black')"><span class="theme-dot black"></span>Black</button><button type="button" class="theme-option" data-theme="wood" onclick="selectTheme('wood')"><span class="theme-dot wood"></span>Wood</button></div><small style="color:var(--muted)">Choose a color theme for your Class Book.</small></div><div class="modal-actions"><button type="button" class="ghost" onclick="closeProfile()">Cancel</button><button class="primary">Save</button></div></form></div></div>
 <div class="modal" id="studentsModal"><div class="modal-card" style="max-width:760px"><div class="modal-head"><h2>Students & Class Hours</h2><button class="close" onclick="closeStudents()">×</button></div><p style="color:var(--muted);margin-top:6px">Class totals are calculated automatically from each student’s bookings. Non-cancelled classes count toward booked, completed, and upcoming hours; cancelled classes are tracked separately.</p><div id="studentList" class="student-list"></div></div></div>
 <div class="toast" id="toast"></div>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-database-compat.js"></script>
+<script>
+/*
+  Firebase setup:
+  1) Open Firebase Console → Project settings → General → Your apps → Web app.
+  2) Copy the firebaseConfig values into firebaseConfig below.
+*/
+const firebaseConfig = {
+  apiKey: "AIzaSyCJ1jbSalKauMWX_vI9_ShIPbzCESTaCpw",
+  authDomain: "justbeng-class-book-6dcb0.firebaseapp.com",
+  databaseURL: "https://justbeng-class-book-6dcb0-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "justbeng-class-book-6dcb0",
+  storageBucket: "justbeng-class-book-6dcb0.firebasestorage.app",
+  messagingSenderId: "709544026324",
+  appId: "1:709544026324:web:4d76ec421f9782d0f89b41"
+};
+</script>
 <script>
 const KEY='justbengClassBookV2';
-let data=JSON.parse(localStorage.getItem(KEY)||'null')||{profile:{name:'Ma’am Beng',role:'',photo:''},bookings:[],studentHours:{},alarm:false,theme:'pink'};
-data.profile=data.profile||{name:'Ma’am Beng',role:'',photo:''};
-data.profile.photo=data.profile.photo||'';delete data.studentHours;data.bookings=data.bookings||[];data.theme=data.theme||'pink';document.body.dataset.theme=data.theme;
+const DEFAULT_DATA={profile:{name:'',role:'',photo:''},bookings:[],alarm:false,theme:'pink'};
+let localData=JSON.parse(localStorage.getItem(KEY)||'null')||null;
+let data=normalizeData(localData||DEFAULT_DATA);
+let currentUser=null;
+let db=null;
+let cloudRef=null;
+let cloudListener=null;
+let cloudReady=false;
+let cloudWriteTimer=null;
+let authInitialized=false;
+let localMigrationUsed=localStorage.getItem('justbengLocalMigrationUsed')||'';
+
+function normalizeData(value){
+  const d=Object.assign({},DEFAULT_DATA,value||{});
+  d.profile=Object.assign({},DEFAULT_DATA.profile,d.profile||{});
+  d.profile.photo=d.profile.photo||'';
+  d.bookings=Array.isArray(d.bookings)?d.bookings:[];
+  d.alarm=!!d.alarm;
+  d.theme=d.theme||'pink';
+  delete d.studentHours;
+  return d;
+}
+document.body.dataset.theme=data.theme;
+
 let weekStart=new Date();weekStart.setHours(0,0,0,0);weekStart.setDate(weekStart.getDate()-weekStart.getDay());
 const pad=n=>String(n).padStart(2,'0');
-function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
-function fmtDate(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+
+function save(){
+  data=normalizeData(data);
+  localStorage.setItem(KEY,JSON.stringify(data));
+  render();
+  if(cloudReady && cloudRef){
+    clearTimeout(cloudWriteTimer);
+    cloudWriteTimer=setTimeout(()=>cloudRef.set(data).catch(err=>showAuthMessage('authError',firebaseError(err))),120);
+  }
+}
+
+function firebaseConfigIsReady(){
+  return firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('PASTE_') &&
+         firebaseConfig.appId && !firebaseConfig.appId.includes('PASTE_') &&
+         firebaseConfig.messagingSenderId && !firebaseConfig.messagingSenderId.includes('PASTE_') &&
+         firebaseConfig.databaseURL;
+}
+function firebaseError(error){
+  const code=error?.code||'';
+  const map={
+    'auth/invalid-credential':'Incorrect email or password.',
+    'auth/invalid-email':'Please enter a valid email address.',
+    'auth/email-already-in-use':'That email already has an account. Please log in.',
+    'auth/weak-password':'Password must be at least 6 characters.',
+    'auth/user-not-found':'No account was found with that email.',
+    'auth/wrong-password':'Incorrect email or password.',
+    'auth/too-many-requests':'Too many attempts. Please wait and try again.',
+    'auth/network-request-failed':'Network connection failed. Check your internet connection.',
+    'auth/operation-not-allowed':'Email/Password authentication is not enabled in Firebase.',
+    'PERMISSION_DENIED':'Firebase database permission denied. Check your Realtime Database rules.'
+  };
+  return map[code]||error?.message||'Something went wrong. Please try again.';
+}
+function showAuthMessage(id,msg){
+  const el=document.getElementById(id);if(!el)return;
+  el.textContent=msg;el.style.display=msg?'block':'none';
+}
+function setAuthBusy(id,busy,label){
+  const b=document.getElementById(id);if(!b)return;b.disabled=busy;b.textContent=busy?'Please wait…':label;
+}
+function showLogin(){document.getElementById('loginView').style.display='block';document.getElementById('signupView').style.display='none';showAuthMessage('authError','');showAuthMessage('authInfo','')}
+function showSignup(){document.getElementById('loginView').style.display='none';document.getElementById('signupView').style.display='block';showAuthMessage('signupError','')}
+async function loginUser(e){
+  e.preventDefault();showAuthMessage('authError','');setAuthBusy('loginBtn',true,'Log In');
+  try{await firebase.auth().signInWithEmailAndPassword(document.getElementById('authEmail').value.trim(),document.getElementById('authPassword').value)}
+  catch(err){showAuthMessage('authError',firebaseError(err));setAuthBusy('loginBtn',false,'Log In')}
+}
+async function signupUser(e){
+  e.preventDefault();showAuthMessage('signupError','');
+  const email=document.getElementById('signupEmail').value.trim();
+  const password=document.getElementById('signupPassword').value;
+  const password2=document.getElementById('signupPassword2').value;
+  if(password!==password2){showAuthMessage('signupError','Passwords do not match.');return}
+  setAuthBusy('signupBtn',true,'Create Account');
+  try{await firebase.auth().createUserWithEmailAndPassword(email,password)}
+  catch(err){showAuthMessage('signupError',firebaseError(err));setAuthBusy('signupBtn',false,'Create Account')}
+}
+async function resetPassword(){
+  const email=document.getElementById('authEmail').value.trim();
+  if(!email){showAuthMessage('authInfo','Enter your email above first, then tap Forgot Password.');return}
+  try{await firebase.auth().sendPasswordResetEmail(email);showAuthMessage('authInfo','Password reset email sent. Check your inbox.')}
+  catch(err){showAuthMessage('authError',firebaseError(err))}
+}
+async function logoutUser(){
+  try{await firebase.auth().signOut()}catch(err){toast(firebaseError(err))}
+}
+async function initializeFirebaseAuth(){
+  if(!firebaseConfigIsReady()){
+    document.body.classList.remove('auth-loading');
+    showAuthMessage('authError','Firebase is not configured yet. Add the Web App config values to index.html, then reload this page.');
+    document.getElementById('authConfigNote').style.display='block';
+    return;
+  }
+  try{
+    firebase.initializeApp(firebaseConfig);
+    db=firebase.database();
+    authInitialized=true;
+    document.getElementById('authConfigNote').style.display='none';
+    firebase.auth().onAuthStateChanged(handleAuthState);
+  }catch(err){
+    document.body.classList.remove('auth-loading');
+    showAuthMessage('authError',firebaseError(err));
+  }
+}
+async function handleAuthState(user){
+  if(cloudRef && cloudListener){try{cloudRef.off('value',cloudListener)}catch(e){}}
+  currentUser=user||null;
+  cloudReady=false;cloudRef=null;cloudListener=null;
+  if(!user){
+    document.body.classList.remove('auth-loading');
+    document.getElementById('authGate').style.display='grid';
+    showLogin();
+    document.getElementById('authUserEmail').textContent='';
+    return;
+  }
+  document.getElementById('authUserEmail').textContent=user.email||'';
+  document.getElementById('authGate').style.display='none';
+  document.body.classList.remove('auth-loading');
+  cloudRef=db.ref('users/'+user.uid+'/classBook');
+  try{
+    const snap=await cloudRef.once('value');
+    const cloudData=snap.val();
+    if(cloudData){
+      data=normalizeData(cloudData);
+      localStorage.setItem(KEY,JSON.stringify(data));
+    }else{
+      const hasLocal=!!localData && !localMigrationUsed && ((localData.bookings||[]).length>0 || localData.profile?.name || localData.profile?.photo || localData.theme!=='pink');
+      data=normalizeData(hasLocal?localData:DEFAULT_DATA);
+      await cloudRef.set(data);
+      localMigrationUsed=user.uid;
+      localStorage.setItem('justbengLocalMigrationUsed',user.uid);
+    }
+    cloudReady=true;
+    cloudListener=snap2=>{
+      if(!snap2.exists()||!currentUser)return;
+      data=normalizeData(snap2.val());
+      localStorage.setItem(KEY,JSON.stringify(data));
+      render();
+    };
+    cloudRef.on('value',cloudListener);
+    render();
+  }catch(err){
+    cloudReady=false;
+    toast(firebaseError(err));
+    render();
+  }
+}
+(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
 function timeOptions(){let s='';for(let h=0;h<24;h++)for(let m of [0,30])s+=`<option value="${pad(h)}:${pad(m)}">${pad(h)}:${pad(m)}</option>`;document.getElementById('time').innerHTML=s}
 function getSelectedDays(){return [...document.querySelectorAll('input[name="bookingDay"]:checked')].map(x=>Number(x.value))}
 function setSelectedDays(days){document.querySelectorAll('input[name="bookingDay"]').forEach(x=>x.checked=days.includes(Number(x.value)))}
@@ -201,12 +411,12 @@ function openProfile(){pName.value='';pRole.value='';document.getElementById('pP
 function closeProfile(){profileModal.classList.remove('show')}
 function updateThemePicker(){document.querySelectorAll('.theme-option').forEach(btn=>btn.classList.toggle('selected',btn.dataset.theme===data.theme))}
 function selectTheme(theme){data.theme=theme;document.body.dataset.theme=theme;updateThemePicker();save();toast(theme.charAt(0).toUpperCase()+theme.slice(1)+' theme selected')}
-function saveProfile(e){e.preventDefault();const file=document.getElementById('pPhoto').files?.[0];const finish=photo=>{data.profile={name:pName.value.trim()||data.profile.name||'Ma’am Beng',role:'',photo:(photo ?? data.profile.photo ?? '')};save();closeProfile();toast('Profile saved')};if(file){const reader=new FileReader();reader.onload=()=>finish(reader.result);reader.readAsDataURL(file)}else finish()}
+function saveProfile(e){e.preventDefault();const file=document.getElementById('pPhoto').files?.[0];const finish=photo=>{data.profile={name:pName.value.trim(),role:'',photo:(photo ?? data.profile.photo ?? '')};save();closeProfile();toast('Profile saved')};if(file){const reader=new FileReader();reader.onload=()=>finish(reader.result);reader.readAsDataURL(file)}else finish()}
 function showSection(section){if(section==='students'){renderStudents();studentsModal.classList.add('show')}else if(section==='dashboard'){window.scrollTo({top:0,behavior:'smooth'})}}
 function closeStudents(){studentsModal.classList.remove('show')}
 function renderStudents(){const grouped=new Map();data.bookings.filter(b=>b.student).forEach(b=>{const key=b.student.trim().toLowerCase();if(!grouped.has(key))grouped.set(key,{name:b.student.trim(),bookings:[]});grouped.get(key).bookings.push(b)});const students=[...grouped.values()].sort((a,b)=>a.name.localeCompare(b.name));const el=document.getElementById('studentList');if(!students.length){el.innerHTML='<div class="empty">No students yet. Book a class to add a student.</div>';return}el.innerHTML=students.map(({name,bookings})=>{const booked=bookings.filter(b=>b.status!=='cancelled').length;const completed=bookings.filter(b=>b.status==='completed').length;const upcoming=Math.max(0,booked-completed);const cancelled=bookings.filter(b=>b.status==='cancelled').length;return `<div class="student-row"><div><strong>${esc(name)}</strong><small>${booked} booked class${booked===1?'':'es'} · ${cancelled} cancelled</small></div><div class="student-stats"><div><label>Booked Classes</label><strong>${booked}</strong></div><div><label>Completed Hours</label><strong>${completed}</strong></div><div><label>Upcoming Hours</label><strong>${upcoming}</strong></div><div><label>Cancelled Classes</label><strong>${cancelled}</strong></div></div></div>`}).join('')}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function escAttr(s){return esc(s)}function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
-timeOptions();render();
+timeOptions();render();initializeFirebaseAuth();
 </script>
 <script>
 if ('serviceWorker' in navigator) {

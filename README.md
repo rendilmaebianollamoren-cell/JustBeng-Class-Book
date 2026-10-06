@@ -1,15 +1,22 @@
-# JustBeng Class Book — GitHub Pages Ready
+# JustBeng Class Book — GitHub Ready
 
-Upload these 5 files to the root of your GitHub repository:
+This project is a Progressive Web App (PWA) for managing classes, students, schedules, attendance/status, and profile settings.
 
-- index.html
-- manifest.webmanifest
-- sw.js
-- icon-192.png
-- icon-512.png
+## Firebase authentication + cloud sync
 
-Then enable GitHub Pages from **Settings → Pages → Deploy from a branch → main → /(root) → Save**.
+See `FIREBASE-SETUP.md` for the one-time Firebase configuration.
 
-Open the published site on the Samsung tablet. From the browser menu, choose **Add to Home screen** / **Install app** when available.
+The app includes:
 
-The app stores class data in the browser's local storage on the device. Data is not automatically shared between different devices or browsers.
+- Email/password login
+- Create account
+- Forgot password
+- Logout
+- Per-user Realtime Database storage
+- Automatic cloud loading after login
+- Cross-device synchronization
+- Local-data migration for the first account on a browser
+- Firebase UID-based database security
+
+The app does **not** contain Firebase Admin credentials.
+
