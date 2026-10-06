@@ -379,7 +379,7 @@ async function handleAuthState(user){
     render();
   }
 }
-(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function fmtDate(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
 function timeOptions(){let s='';for(let h=0;h<24;h++)for(let m of [0,30])s+=`<option value="${pad(h)}:${pad(m)}">${pad(h)}:${pad(m)}</option>`;document.getElementById('time').innerHTML=s}
 function getSelectedDays(){return [...document.querySelectorAll('input[name="bookingDay"]:checked')].map(x=>Number(x.value))}
 function setSelectedDays(days){document.querySelectorAll('input[name="bookingDay"]').forEach(x=>x.checked=days.includes(Number(x.value)))}
