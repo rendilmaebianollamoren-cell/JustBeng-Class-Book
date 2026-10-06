@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#d9289b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="JustBeng Class Book">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<title>JustBeng Class Book</title>
+<style>
+:root{--pink:#d9289b;--pink2:#ef62bb;--purple:#5b2b7d;--bg:#faf7fc;--ink:#34253d;--muted:#806f87;--line:#eadfec;--green:#3fb978;--blue:#4b8df8;--orange:#f4ad3d;--red:#e65d68;--card:#fff;--shadow:0 10px 30px rgba(80,35,90,.09)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#fff,#faf5fc);min-height:100vh}.app{display:flex;min-height:100vh}.sidebar{width:274px;background:linear-gradient(180deg,#8f1980,#cf2a9d);color:white;padding:24px 18px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;gap:12px;align-items:center;margin:0 10px 25px}.brand-icon{width:54px;height:54px;border-radius:14px;background:#fff;display:grid;place-items:center;color:#ec61bc;font-size:29px;box-shadow:0 8px 20px #5f0e5540}.brand h1{font-size:24px;margin:0}.brand span{display:block;color:#ff9bdd;font-size:17px;font-weight:700}.profile{background:#ffffff18;border:1px solid #ffffff25;border-radius:22px;padding:18px;text-align:center;margin-bottom:18px}.avatar{width:92px;height:92px;border-radius:50%;margin:auto auto 10px;background:linear-gradient(135deg,#f6b5d9,#fff);display:grid;place-items:center;color:#8d3379;font-weight:800;font-size:28px;border:5px solid #ffffff55}.profile h2{font-size:20px;margin:4px}.profile p{margin:0;color:#ffd4ee;font-size:14px}.nav{display:grid;gap:8px;margin-top:16px}.nav button{border:0;background:transparent;color:white;text-align:left;padding:14px 16px;border-radius:14px;font-size:15px;cursor:pointer}.nav button:hover,.nav button.active{background:#fff;color:#a52288}.nav button span{margin-right:10px}.main{flex:1;padding:28px;min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.topbar h1{margin:0;font-size:31px;color:#3a2444}.topbar p{margin:5px 0 0;color:var(--muted)}.top-actions{display:flex;gap:10px;align-items:center}.icon-btn,.alarm-btn,.primary,.ghost{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 14px;cursor:pointer;color:var(--ink);font-weight:700}.alarm-btn{border-color:#f1b8df;color:#a51e87}.primary{background:var(--pink);color:white;border-color:var(--pink);box-shadow:0 7px 18px #d9289b33}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px}.metric{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center}.metric .ico{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:22px}.metric small{display:block;color:var(--muted)}.metric strong{font-size:26px;display:block;margin:2px 0}.pink{background:#ffe3f5;color:#d12a9a}.green{background:#dcf6e8;color:#23995e}.orange{background:#fff0d7;color:#d28a19}.purple{background:#eee1ff;color:#7240bc}.layout{display:grid;grid-template-columns:minmax(550px,1fr) 330px;gap:18px}.calendar-card,.panel,.quick,.modal-card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.calendar-card{padding:18px;overflow:auto}.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.calendar-head h2{margin:0}.month-controls{display:flex;gap:7px}.month-controls button{border:1px solid var(--line);background:white;border-radius:10px;padding:7px 11px;cursor:pointer}.week{display:grid;grid-template-columns:64px repeat(7,minmax(105px,1fr));min-width:820px}.week>div{border-right:1px solid #eee7f0;border-bottom:1px solid #eee7f0}.day{padding:8px;text-align:center;font-weight:800;background:#fcf9fd}.day.active{color:#8b2479;background:#f7e4f3}.time{height:52px;padding:9px 7px;color:#81728a;font-size:12px;text-align:center}.slot{height:52px;position:relative}.booking{position:absolute;left:4px;right:4px;top:3px;min-height:45px;border-radius:9px;padding:6px 8px;font-size:11px;cursor:pointer;overflow:hidden;border-left:4px solid}.booking strong{display:block;font-size:12px}.booking.completed{opacity:.75}.booking .mini-status{font-size:10px}.b-pink{background:#f8d9ee;border-left-color:#c82896}.b-green{background:#daf3e5;border-left-color:#42a96f}.b-blue{background:#dce9ff;border-left-color:#4389ed}.b-orange{background:#fff0d2;border-left-color:#e6a033}.right{display:grid;gap:18px;align-content:start}.panel{padding:17px}.panel h3{margin:0 0 14px}.class-item{border:1px solid var(--line);border-left:5px solid var(--pink);border-radius:12px;padding:12px;margin-bottom:10px}.class-item:last-child{margin-bottom:0}.class-top{display:flex;justify-content:space-between;gap:8px}.status{border-radius:20px;padding:4px 9px;font-size:11px;font-weight:800;white-space:nowrap}.status.upcoming{background:#e7efff;color:#3776d4}.status.inprogress{background:#dff6e9;color:#248d59}.status.completed{background:#e4f7ed;color:#218a57}.status.cancelled{background:#ffe4e6;color:#cc4a57}.join{display:block;text-align:center;text-decoration:none;margin-top:9px;background:var(--pink);color:#fff;border-radius:9px;padding:8px;font-weight:800;font-size:12px}.class-item button{border:0;background:none;color:#a02085;cursor:pointer;font-weight:700}.status-list{display:grid;gap:11px}.status-row{display:flex;justify-content:space-between;align-items:center}.status-row span:first-child{display:flex;gap:8px;align-items:center}.dot{width:12px;height:12px;border-radius:50%;display:inline-block}.quick{padding:15px;display:flex;gap:9px;flex-wrap:wrap}.quick button{flex:1;min-width:120px}.quote{background:linear-gradient(135deg,#fff0fa,#fff);text-align:center;color:#d02a98;font-style:italic}.modal{display:none;position:fixed;inset:0;background:#27162e66;backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:20px;z-index:10}.modal.show{display:flex}.modal-card{width:min(720px,100%);max-height:92vh;overflow:auto;padding:24px}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h2{margin:0}.close{border:0;background:transparent;font-size:25px;cursor:pointer}.form{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:16px}.field.full{grid-column:1/-1}.field label{display:block;font-size:13px;font-weight:800;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #dccde1;border-radius:11px;font:inherit;background:#fff}.field textarea{min-height:75px;resize:vertical}.days{display:flex;flex-wrap:wrap;gap:6px}.days label{margin:0}.days input{display:none}.days span{display:inline-block;padding:8px 10px;border:1px solid var(--line);border-radius:9px;cursor:pointer;font-size:12px}.days input:checked+span{background:var(--pink);color:#fff;border-color:var(--pink);box-shadow:0 4px 10px color-mix(in srgb,var(--pink) 25%,transparent)}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}.danger{color:#c94350;border-color:#f0b9bf}.empty{padding:18px;text-align:center;color:var(--muted)}.toast{position:fixed;right:20px;bottom:20px;background:#34253d;color:#fff;padding:12px 16px;border-radius:12px;display:none;z-index:20}.toast.show{display:block}@media(max-width:1050px){.sidebar{width:220px}.layout{grid-template-columns:1fr}.right{grid-template-columns:repeat(2,1fr)}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.app{display:block}.sidebar{position:relative;width:100%;height:auto}.main{padding:16px}.metrics{grid-template-columns:1fr}.right{grid-template-columns:1fr}.form{grid-template-columns:1fr}.field.full{grid-column:auto}.topbar{align-items:flex-start;gap:10px}.top-actions{flex-wrap:wrap}.layout{display:block}.right{margin-top:18px}}
+
+/* Updates */
+.avatar{overflow:hidden;background:#f6d7ec;position:relative}.avatar img{width:100%;height:100%;object-fit:cover;display:block}.photo-preview{width:82px;height:82px;border-radius:50%;margin-top:10px;overflow:hidden;background:#f6d7ec;display:grid;place-items:center;color:#8d3379;font-weight:800}.photo-preview img{width:100%;height:100%;object-fit:cover}.calendar-card{max-height:calc(100vh - 210px);overflow:auto}.calendar-head{position:sticky;top:0;z-index:8;background:var(--card);padding:4px 0 12px;box-shadow:0 1px 0 #eee7f0;isolation:isolate}.week{position:relative}.week>.day{position:sticky;top:61px;z-index:4;background:var(--card);box-shadow:0 1px 0 #eee7f0;isolation:isolate}.week>.day:first-child{left:0;z-index:6;position:sticky}.week>.time{position:sticky;left:0;z-index:3;background:#fff;box-shadow:1px 0 0 #eee7f0}.student-list{display:grid;gap:10px;margin-top:16px}.student-row{display:grid;grid-template-columns:1fr minmax(390px,1.7fr);gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px}.student-row strong{display:block}.student-row small{color:var(--muted)}.student-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.student-stats>div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:4px 6px}.student-stats label{font-size:10px;font-weight:800;color:var(--muted);line-height:1.15;text-align:center}.student-stats strong{font-size:23px;color:var(--pink)}@media(max-width:700px){.student-row{grid-template-columns:1fr}.student-stats{width:100%}.calendar-card{max-height:65vh}}
+
+/* Theme chooser */
+body[data-theme="violet"]{--pink:#7b3fc6;--pink2:#a875e8;--purple:#4c2774;--bg:#f8f5fd;--ink:#30233d;--muted:#766a84;--line:#e4d9f1;--card:#fff;--green:#3fb978;--shadow:0 10px 30px rgba(65,35,90,.09)}
+body[data-theme="pink"]{--pink:#d9289b;--pink2:#ef62bb;--purple:#5b2b7d;--bg:#faf7fc;--ink:#34253d;--muted:#806f87;--line:#eadfec;--card:#fff;--green:#3fb978;--shadow:0 10px 30px rgba(80,35,90,.09)}
+body[data-theme="green"]{--pink:#2e9b70;--pink2:#55bf91;--purple:#236a50;--bg:#f3faf6;--ink:#23382f;--muted:#687e74;--line:#d8ebe1;--card:#fff;--green:#2e9b70;--shadow:0 10px 30px rgba(35,105,80,.10)}
+body[data-theme="red"]{--pink:#d94b58;--pink2:#ef737d;--purple:#8a2e39;--bg:#fff6f6;--ink:#3e292c;--muted:#856d70;--line:#efdadd;--card:#fff;--green:#42a96f;--shadow:0 10px 30px rgba(120,45,55,.10)}
+body[data-theme="black"]{--pink:#242424;--pink2:#4b4b4b;--purple:#111;--bg:#f4f4f4;--ink:#222;--muted:#666;--line:#d7d7d7;--card:#fff;--green:#3fa76f;--shadow:0 10px 30px rgba(0,0,0,.12)}
+body[data-theme="wood"]{--pink:#9a6941;--pink2:#bd8a5d;--purple:#65442d;--bg:#f8f0e5;--ink:#3f3025;--muted:#806b59;--line:#e4d3bd;--card:#fffdf9;--green:#628b62;--shadow:0 10px 30px rgba(95,65,40,.12)}
+body[data-theme="violet"] .sidebar{background:linear-gradient(180deg,#5e2a91,#8b55c8)}
+body[data-theme="pink"] .sidebar{background:linear-gradient(180deg,#8f1980,#cf2a9d)}
+body[data-theme="green"] .sidebar{background:linear-gradient(180deg,#1f7656,#38aa7d)}
+body[data-theme="red"] .sidebar{background:linear-gradient(180deg,#9d2938,#df5662)}
+body[data-theme="black"] .sidebar{background:linear-gradient(180deg,#161616,#3a3a3a)}
+body[data-theme="wood"] .sidebar{background:linear-gradient(180deg,#6b472f,#a7754c)}
+body[data-theme="violet"] .nav button:hover,body[data-theme="violet"] .nav button.active{color:#6b35a7}
+body[data-theme="pink"] .nav button:hover,body[data-theme="pink"] .nav button.active{color:#a52288}
+body[data-theme="green"] .nav button:hover,body[data-theme="green"] .nav button.active{color:#247557}
+body[data-theme="red"] .nav button:hover,body[data-theme="red"] .nav button.active{color:#a52f3d}
+body[data-theme="black"] .nav button:hover,body[data-theme="black"] .nav button.active{color:#222}
+body[data-theme="wood"] .nav button:hover,body[data-theme="wood"] .nav button.active{color:#765034}
+body[data-theme="violet"] .day.active{color:#6b35a7;background:#eee3fb}
+body[data-theme="green"] .day.active{color:#247557;background:#e0f3ea}
+body[data-theme="red"] .day.active{color:#a52f3d;background:#fae4e6}
+body[data-theme="black"] .day.active{color:#222;background:#ededed}
+body[data-theme="wood"] .day.active{color:#765034;background:#f2e6d6}
+body[data-theme="violet"] .days input:checked+span{background:#eadcf8;color:#6937a2;border-color:#c9aae9}
+body[data-theme="green"] .days input:checked+span{background:#dcefe7;color:#247557;border-color:#a9d7c2}
+body[data-theme="red"] .days input:checked+span{background:#f8dfe2;color:#a52f3d;border-color:#e7afb6}
+body[data-theme="black"] .days input:checked+span{background:#e8e8e8;color:#222;border-color:#bbb}
+body[data-theme="wood"] .days input:checked+span{background:#eee1d1;color:#765034;border-color:#d7bfa2}
+.theme-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
+.theme-option{border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 7px;cursor:pointer;font:inherit;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;transition:.15s}
+.theme-option:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.theme-option.selected{border-color:var(--pink);box-shadow:0 0 0 2px color-mix(in srgb,var(--pink) 18%,transparent)}
+.theme-dot{width:24px;height:24px;border-radius:50%;flex:0 0 24px;border:1px solid rgba(0,0,0,.12)}
+.theme-dot.violet{background:linear-gradient(135deg,#5e2a91,#b07ce5)}
+.theme-dot.pink{background:linear-gradient(135deg,#d9289b,#f47bc4)}
+.theme-dot.green{background:linear-gradient(135deg,#1f7656,#55bf91)}
+.theme-dot.red{background:linear-gradient(135deg,#9d2938,#ef737d)}
+.theme-dot.black{background:linear-gradient(135deg,#111,#666)}
+.theme-dot.wood{background:linear-gradient(135deg,#6b472f,#c4976e)}
+@media(max-width:500px){.theme-picker{grid-template-columns:repeat(2,1fr)}}
+
+</style>
+
+<style id="soft-theme-calendar">
+/* Soft theme color for the calendar header, dates, and time column */
+.calendar-head{
+  background:color-mix(in srgb,var(--pink) 30%,white) !important;
+  background-color:color-mix(in srgb,var(--pink) 30%,white) !important;
+  color:color-mix(in srgb,var(--pink) 78%,var(--ink)) !important;
+  box-shadow:0 8px 0 color-mix(in srgb,var(--pink) 22%,white),0 10px 14px rgba(40,25,50,.06) !important;
+}
+.calendar-head::before,.calendar-head::after{background:color-mix(in srgb,var(--pink) 30%,white) !important;}
+.calendar-head h2{color:color-mix(in srgb,var(--pink) 78%,var(--ink)) !important;}
+.month-controls button{
+  background:color-mix(in srgb,var(--pink) 18%,white) !important;
+  color:color-mix(in srgb,var(--pink) 78%,var(--ink)) !important;
+  border-color:color-mix(in srgb,var(--pink) 28%,white) !important;
+}
+.week>.day{
+  background:color-mix(in srgb,var(--pink) 16%,white) !important;
+  background-color:color-mix(in srgb,var(--pink) 16%,white) !important;
+  color:color-mix(in srgb,var(--pink) 70%,var(--ink)) !important;
+  box-shadow:0 1px 0 color-mix(in srgb,var(--pink) 10%,white) !important;
+}
+.week>.day.active{
+  background:color-mix(in srgb,var(--pink) 27%,white) !important;
+  color:color-mix(in srgb,var(--pink) 82%,var(--ink)) !important;
+}
+.week>.time{
+  background:color-mix(in srgb,var(--pink) 13%,white) !important;
+  color:color-mix(in srgb,var(--pink) 58%,var(--ink)) !important;
+  box-shadow:1px 0 0 color-mix(in srgb,var(--pink) 9%,white) !important;
+}
+/* Keep booking/profile/students dialogs above the sticky calendar */
+.modal,#bookingModal,#profileModal,#studentsModal{z-index:1000 !important;}
+</style>
+
+<style id="today-day-highlight">
+/* Today is always identified from the real local date, regardless of month/year. */
+.week>.day.active{
+  background:color-mix(in srgb,var(--pink) 58%,white) !important;
+  color:color-mix(in srgb,var(--pink) 92%,#111) !important;
+  font-weight:900 !important;
+  box-shadow:inset 0 -3px 0 color-mix(in srgb,var(--pink) 72%,#111), 0 1px 0 color-mix(in srgb,var(--pink) 22%,white) !important;
+}
+</style>
+
+<style id="larger-profile">
+.profile{padding:24px 20px;margin-bottom:20px;}
+.avatar{width:120px;height:120px;font-size:34px;margin:auto auto 14px;}
+.profile h2{font-size:22px;margin:6px 0;}
+.profile p{font-size:15px;}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="profile"><div class="avatar" id="avatar">MB</div><h2 id="profileName">Ma'am Beng</h2><p id="profileRole">Private Class Teacher</p><button class="ghost" style="margin-top:12px" onclick="openProfile()">✎ Edit Profile</button></div>
+  <nav class="nav">
+    <button class="active" onclick="showSection('dashboard')"><span>▣</span>Dashboard</button>
+    <button onclick="openBooking()"><span>▣</span>Book a Class</button>
+    <button onclick="showSection('students')"><span>♙</span>Students</button>
+  </nav>
+</aside>
+<main class="main">
+  <header class="topbar"><div><h1>JustBeng Class Book</h1><p>Schedules set. Classes organized. Every class accounted for.</p></div><div class="top-actions"><button class="icon-btn" title="Notifications">♧</button><button class="alarm-btn" id="alarmBtn" onclick="toggleAlarm()">🔔 Enable Class Alarm</button></div></header>
+  <section class="metrics">
+    <div class="metric"><div class="ico pink">▣</div><div><small>Total Classes</small><strong id="totalClasses">0</strong><small>This month</small></div></div>
+    <div class="metric"><div class="ico green">✓</div><div><small>Completed Classes</small><strong id="completedClasses">0</strong><small>This month</small></div></div>
+    <div class="metric"><div class="ico orange">◷</div><div><small>Upcoming Classes</small><strong id="upcomingClasses">0</strong><small>This week</small></div></div>
+    <div class="metric"><div class="ico purple">♙</div><div><small>Total Students</small><strong id="totalStudents">0</strong><small>Active</small></div></div>
+  </section>
+  <div class="layout">
+    <div>
+      <section class="calendar-card" id="calendarSection">
+        <div class="calendar-head"><h2 id="monthTitle">October 2026</h2><div class="month-controls"><button onclick="changeWeek(-1)">‹</button><button onclick="goToday()">Today</button><button onclick="changeWeek(1)">›</button></div></div>
+        <div class="week" id="calendar"></div>
+      </section>
+      <section class="quick" style="margin-top:18px"><button class="primary" onclick="openBooking()">▣ Book a Class</button><button class="ghost" onclick="showSection('students')">♙ View Students</button></section>
+    </div>
+    <aside class="right">
+      <section class="panel"><h3>▣ My Class Today <span id="todayLabel" style="float:right;font-size:11px;color:#9b5b91"></span></h3><div id="todayClasses"></div></section>
+      <section class="panel"><h3>Class Status</h3><div class="status-list"><div class="status-row"><span><i class="dot" style="background:var(--green)"></i>Completed</span><strong id="statCompleted">0</strong></div><div class="status-row"><span><i class="dot" style="background:#9b6de0"></i>In Progress</span><strong id="statProgress">0</strong></div><div class="status-row"><span><i class="dot" style="background:var(--blue)"></i>Upcoming</span><strong id="statUpcoming">0</strong></div><div class="status-row"><span><i class="dot" style="background:var(--red)"></i>Cancelled</span><strong id="statCancelled">0</strong></div></div></section>
+      <section class="panel quote">♥<br>Small steps build big progress,<br>one class at a time.</section>
+    </aside>
+  </div>
+</main></div>
+
+<div class="modal" id="bookingModal"><div class="modal-card" style="max-width:620px"><div class="modal-head"><h2 id="modalTitle">Book a Class</h2><button class="close" onclick="closeBooking()">×</button></div><form class="form" onsubmit="saveBooking(event)">
+  <input type="hidden" id="editId">
+  <div class="field full"><label>Student Name</label><input id="student" required placeholder="e.g. Maria Santos"></div>
+  <div class="field full"><label>How do you want to book?</label><div class="booking-frequency"><label class="frequency-option"><input type="radio" name="bookingFrequency" value="daily" checked onchange="toggleBookingFrequency()"><span>Daily<br><small style="font-weight:600;color:var(--muted)">One-time booking</small></span></label><label class="frequency-option"><input type="radio" name="bookingFrequency" value="weekly" onchange="toggleBookingFrequency()"><span>Weekly<br><small style="font-weight:600;color:var(--muted)">Repeat every week</small></span></label></div></div>
+  <div class="field full"><label>Booking Days</label><div class="days" id="bookingDays"><label><input type="checkbox" name="bookingDay" value="0"><span>Sunday</span></label><label><input type="checkbox" name="bookingDay" value="1"><span>Monday</span></label><label><input type="checkbox" name="bookingDay" value="2"><span>Tuesday</span></label><label><input type="checkbox" name="bookingDay" value="3"><span>Wednesday</span></label><label><input type="checkbox" name="bookingDay" value="4"><span>Thursday</span></label><label><input type="checkbox" name="bookingDay" value="5"><span>Friday</span></label><label><input type="checkbox" name="bookingDay" value="6"><span>Saturday</span></label></div><small style="color:var(--muted)">Daily: choose the day(s) for this week. Weekly: choose one or more days to repeat.</small><div id="bookingWeekHint" style="margin-top:7px;font-size:12px;font-weight:800;color:var(--pink)"></div></div>
+  <div class="field" id="weeklyWeeksField" style="display:none"><label>Repeat For</label><select id="weeklyWeeks"><option value="2">2 weeks</option><option value="4" selected>4 weeks</option><option value="8">8 weeks</option><option value="12">12 weeks</option></select></div>
+  <div class="field"><label>Booking Time (24-hour)</label><select id="time" required></select></div>
+  <div class="field full"><label>Meeting Link</label><input id="meeting" type="url" placeholder="https://..."><small style="color:var(--muted)">VooV, PalFish, Zoom, Google Meet, Teams, or any valid class link.</small></div>
+  <div class="field full"><label>Notes (Optional)</label><textarea id="notes" placeholder="Homework, lesson notes, reminders..."></textarea></div>
+  <div class="modal-actions"><button type="button" class="ghost danger" id="deleteBtn" style="display:none" onclick="deleteBooking()">Delete</button><button type="button" class="ghost" onclick="closeBooking()">Cancel</button><button class="primary">Save Class</button></div>
+</form></div></div>
+<div class="modal" id="profileModal"><div class="modal-card" style="max-width:480px"><div class="modal-head"><h2>Edit Profile</h2><button class="close" onclick="closeProfile()">×</button></div><form class="form" onsubmit="saveProfile(event)"><div class="field full"><label>Teacher Name</label><input id="pName" value="" placeholder=""></div><div class="field full"><label>Bio</label><input id="pRole" value="" placeholder=""></div><div class="field full"><label>Profile Picture</label><input id="pPhoto" type="file" accept="image/*"><small style="color:var(--muted)">Choose any JPG, PNG, WEBP, GIF, or other image supported by your browser.</small></div><div class="field full"><label>Theme Color</label><div class="theme-picker" id="themePicker"><button type="button" class="theme-option" data-theme="violet" onclick="selectTheme('violet')"><span class="theme-dot violet"></span>Violet</button><button type="button" class="theme-option" data-theme="pink" onclick="selectTheme('pink')"><span class="theme-dot pink"></span>Pink</button><button type="button" class="theme-option" data-theme="green" onclick="selectTheme('green')"><span class="theme-dot green"></span>Green</button><button type="button" class="theme-option" data-theme="red" onclick="selectTheme('red')"><span class="theme-dot red"></span>Red</button><button type="button" class="theme-option" data-theme="black" onclick="selectTheme('black')"><span class="theme-dot black"></span>Black</button><button type="button" class="theme-option" data-theme="wood" onclick="selectTheme('wood')"><span class="theme-dot wood"></span>Wood</button></div><small style="color:var(--muted)">Choose a color theme for your Class Book.</small></div><div class="modal-actions"><button type="button" class="ghost" onclick="closeProfile()">Cancel</button><button class="primary">Save</button></div></form></div></div>
+<div class="modal" id="studentsModal"><div class="modal-card" style="max-width:760px"><div class="modal-head"><h2>Students & Class Hours</h2><button class="close" onclick="closeStudents()">×</button></div><p style="color:var(--muted);margin-top:6px">Class totals are calculated automatically from each student’s bookings. Non-cancelled classes count toward booked, completed, and upcoming hours; cancelled classes are tracked separately.</p><div id="studentList" class="student-list"></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='justbengClassBookV2';
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{profile:{name:'Ma’am Beng',role:'',photo:''},bookings:[],studentHours:{},alarm:false,theme:'pink'};
+data.profile=data.profile||{name:'Ma’am Beng',role:'',photo:''};
+data.profile.photo=data.profile.photo||'';delete data.studentHours;data.bookings=data.bookings||[];data.theme=data.theme||'pink';document.body.dataset.theme=data.theme;
+let weekStart=new Date();weekStart.setHours(0,0,0,0);weekStart.setDate(weekStart.getDate()-weekStart.getDay());
+const pad=n=>String(n).padStart(2,'0');
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function fmtDate(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function timeOptions(){let s='';for(let h=0;h<24;h++)for(let m of [0,30])s+=`<option value="${pad(h)}:${pad(m)}">${pad(h)}:${pad(m)}</option>`;document.getElementById('time').innerHTML=s}
+function getSelectedDays(){return [...document.querySelectorAll('input[name="bookingDay"]:checked')].map(x=>Number(x.value))}
+function setSelectedDays(days){document.querySelectorAll('input[name="bookingDay"]').forEach(x=>x.checked=days.includes(Number(x.value)))}
+function currentWeekDate(dayIndex){const d=new Date(weekStart);d.setDate(d.getDate()+Number(dayIndex));return fmtDate(d)}
+function updateBookingWeekHint(){const a=new Date(weekStart),b=new Date(weekStart);b.setDate(b.getDate()+6);const label=document.getElementById('bookingWeekHint');if(label)label.textContent=`Current dashboard week: ${a.toLocaleDateString(undefined,{month:'short',day:'numeric'})} – ${b.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}`}
+function openBooking(id=null){const modal=document.getElementById('bookingModal');modal.classList.add('show');document.getElementById('deleteBtn').style.display=id?'inline-block':'none';document.getElementById('modalTitle').textContent=id?'Edit Class Booking':'Book a Class';updateBookingWeekHint();if(id){const b=data.bookings.find(x=>x.id===id);if(!b)return;student.value=b.student||'';time.value=b.time||'09:00';meeting.value=b.meeting||'';notes.value=b.notes||'';document.getElementById('editId').value=id;setSelectedDays([new Date(b.date+'T00:00:00').getDay()])}else{document.querySelector('#bookingModal form').reset();document.getElementById('editId').value='';time.value='09:00';setSelectedDays([new Date().getDay()]);document.querySelector('input[name="bookingFrequency"][value="daily"]').checked=true;toggleBookingFrequency()}}
+function closeBooking(){document.getElementById('bookingModal').classList.remove('show')}
+function getBookingFrequency(){return document.querySelector('input[name="bookingFrequency"]:checked')?.value||'daily'}
+function toggleBookingFrequency(){const weekly=getBookingFrequency()==='weekly';document.getElementById('weeklyWeeksField').style.display=weekly?'block':'none';if(weekly&&getSelectedDays().length>1){document.getElementById('bookingWeekHint').textContent='Weekly booking: selected days will repeat every week.'}}
+function saveBooking(e){e.preventDefault();const selectedDays=getSelectedDays();if(!selectedDays.length){toast('Please select at least one booking day');return}const editId=document.getElementById('editId').value;const frequency=getBookingFrequency();const weeks=frequency==='weekly'?Number(document.getElementById('weeklyWeeks').value):1;const studentName=student.value.trim(),bookingTime=time.value,meetingLink=meeting.value.trim(),bookingNotes=notes.value.trim();if(editId){const old=data.bookings.find(x=>x.id===editId);if(!old)return;const firstDate=currentWeekDate(selectedDays[0]);old.student=studentName;old.date=firstDate;old.time=bookingTime;old.meeting=meetingLink;old.notes=bookingNotes;for(const day of selectedDays.slice(1)){const ds=currentWeekDate(day);const existing=data.bookings.find(x=>x.id!==editId&&x.student===studentName&&x.date===ds&&x.time===bookingTime);if(existing){existing.meeting=meetingLink;existing.notes=bookingNotes}else data.bookings.push({id:crypto.randomUUID(),student:studentName,date:ds,time:bookingTime,meeting:meetingLink,notes:bookingNotes,status:'upcoming'})}save();closeBooking();toast(selectedDays.length>1?`Class updated for ${selectedDays.length} days`:'Class updated')}else{let added=0;for(let w=0;w<weeks;w++){for(const day of selectedDays){const d=new Date(weekStart);d.setDate(d.getDate()+Number(day)+(w*7));const ds=fmtDate(d);const existing=data.bookings.find(x=>x.student===studentName&&x.date===ds&&x.time===bookingTime&&x.status!=='cancelled');if(existing){existing.meeting=meetingLink;existing.notes=bookingNotes}else{data.bookings.push({id:crypto.randomUUID(),student:studentName,date:ds,time:bookingTime,meeting:meetingLink,notes:bookingNotes,status:'upcoming',frequency:frequency});added++}}}save();closeBooking();toast(frequency==='weekly'?`Weekly class booked for ${weeks} weeks — ${added} classes added`:`Class booked for ${selectedDays.length} day${selectedDays.length===1?'':'s'} — ${added} added to your dashboard`)}}
+function deleteBooking(){const id=document.getElementById('editId').value;if(!id)return;if(confirm('Delete this class?')){data.bookings=data.bookings.filter(b=>b.id!==id);save();closeBooking();toast('Class deleted')}}
+function markDone(id){const b=data.bookings.find(x=>x.id===id);if(b){b.status='completed';b.completedAt=new Date().toISOString();save();toast('Class completed ✓')}}
+function markProgress(id){const b=data.bookings.find(x=>x.id===id);if(b){b.status='inprogress';save();toast('Class marked In Class')}}
+function cancelClass(id){const b=data.bookings.find(x=>x.id===id);if(b){b.status='cancelled';save();toast('Class cancelled')}}
+function statusLabel(b){return b.status==='completed'?'Class Completed':b.status==='inprogress'?'In Class':b.status==='cancelled'?'Cancelled':'Upcoming'}
+function render(){
+ document.body.dataset.theme=data.theme||'pink';
+ const avatar=document.getElementById('avatar');document.getElementById('profileName').textContent=data.profile.name;document.getElementById('profileRole').textContent=data.profile.role;if(data.profile.photo)avatar.innerHTML=`<img src="${data.profile.photo}" alt="Profile picture">`;else avatar.textContent=data.profile.name.split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();
+ const now=new Date();const today=fmtDate(now);document.getElementById('todayLabel').textContent=now.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+ const total=data.bookings.length,completed=data.bookings.filter(b=>b.status==='completed').length,cancelled=data.bookings.filter(b=>b.status==='cancelled').length,progress=data.bookings.filter(b=>b.status==='inprogress').length,upcoming=data.bookings.filter(b=>!['completed','cancelled','inprogress'].includes(b.status)).length;
+ document.getElementById('totalClasses').textContent=total;document.getElementById('completedClasses').textContent=completed;document.getElementById('upcomingClasses').textContent=upcoming;document.getElementById('totalStudents').textContent=new Set(data.bookings.map(b=>b.student).filter(Boolean)).size;
+ document.getElementById('statCompleted').textContent=completed;document.getElementById('statProgress').textContent=progress;document.getElementById('statUpcoming').textContent=upcoming;document.getElementById('statCancelled').textContent=cancelled;document.getElementById('alarmBtn').textContent=data.alarm?'🔔 Class Alarm On':'🔔 Enable Class Alarm';renderCalendar();renderToday();
+}
+function renderCalendar(){const cal=document.getElementById('calendar');let html='<div class="day">Time</div>';for(let i=0;i<7;i++){const d=new Date(weekStart);d.setDate(d.getDate()+i);html+=`<div class="day ${fmtDate(d)===fmtDate(new Date())?'active':''}">${d.toLocaleDateString(undefined,{weekday:'short'})}<br>${d.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div>`}for(let h=0;h<24;h++){for(const min of [0,30]){const label=`${pad(h)}:${pad(min)}`;html+=`<div class="time">${label}</div>`;for(let col=0;col<7;col++){const d=new Date(weekStart);d.setDate(d.getDate()+col);const ds=fmtDate(d);const items=data.bookings.filter(b=>b.date===ds&&b.time===label);let inner='';items.forEach((b,j)=>{const color=['b-pink','b-green','b-blue','b-orange'][j%4];inner+=`<div class="booking ${color} ${b.status==='completed'?'completed':''}" onclick="openBooking('${b.id}')"><strong>${b.time} · ${esc(b.student)}</strong><span>${b.status==='completed'?'✓ Class Completed':statusLabel(b)}</span></div>`});html+=`<div class="slot">${inner}</div>`}}}cal.innerHTML=html;document.getElementById('monthTitle').textContent=new Date(weekStart.getFullYear(),weekStart.getMonth(),1).toLocaleDateString(undefined,{month:'long',year:'numeric'})}
+function renderToday(){const el=document.getElementById('todayClasses');const today=fmtDate(new Date());const arr=data.bookings.filter(b=>b.date===today).sort((a,b)=>a.time.localeCompare(b.time));if(!arr.length){el.innerHTML='<div class="empty">No classes scheduled today.</div>';return}el.innerHTML=arr.map(b=>`<div class="class-item"><div class="class-top"><div><strong>${b.time} · ${esc(b.student)}</strong><br><small>${b.status==='completed'?'✓ Class Completed':b.status==='cancelled'?'× Cancelled':'Class Booked'}</small></div><span class="status ${b.status}">${statusLabel(b)}</span></div>${b.meeting&&b.status!=='completed'&&b.status!=='cancelled'?`<a class="join" href="${escAttr(b.meeting)}" target="_blank" rel="noopener noreferrer">▶ Join Class</a>`:''}<div style="display:flex;gap:10px;margin-top:9px;flex-wrap:wrap">${b.status!=='completed'&&b.status!=='cancelled'?`<button onclick="markDone('${b.id}')">✓ Class Done</button>`:''}${b.status!=='cancelled'&&b.status!=='completed'?`<button onclick="cancelClass('${b.id}')">× Cancelled</button>`:''}</div></div>`).join('')}
+function changeWeek(n){weekStart.setDate(weekStart.getDate()+n*7);renderCalendar();updateBookingWeekHint()}function goToday(){weekStart=new Date();weekStart.setHours(0,0,0,0);weekStart.setDate(weekStart.getDate()-weekStart.getDay());renderCalendar();updateBookingWeekHint()}
+function toggleAlarm(){data.alarm=!data.alarm;save();toast(data.alarm?'Class alarm enabled':'Class alarm disabled')}
+function openProfile(){pName.value='';pRole.value='';document.getElementById('pPhoto').value='';updateThemePicker();profileModal.classList.add('show')}
+function closeProfile(){profileModal.classList.remove('show')}
+function updateThemePicker(){document.querySelectorAll('.theme-option').forEach(btn=>btn.classList.toggle('selected',btn.dataset.theme===data.theme))}
+function selectTheme(theme){data.theme=theme;document.body.dataset.theme=theme;updateThemePicker();save();toast(theme.charAt(0).toUpperCase()+theme.slice(1)+' theme selected')}
+function saveProfile(e){e.preventDefault();const file=document.getElementById('pPhoto').files?.[0];const finish=photo=>{data.profile={name:pName.value.trim()||data.profile.name||'Ma’am Beng',role:'',photo:(photo ?? data.profile.photo ?? '')};save();closeProfile();toast('Profile saved')};if(file){const reader=new FileReader();reader.onload=()=>finish(reader.result);reader.readAsDataURL(file)}else finish()}
+function showSection(section){if(section==='students'){renderStudents();studentsModal.classList.add('show')}else if(section==='dashboard'){window.scrollTo({top:0,behavior:'smooth'})}}
+function closeStudents(){studentsModal.classList.remove('show')}
+function renderStudents(){const grouped=new Map();data.bookings.filter(b=>b.student).forEach(b=>{const key=b.student.trim().toLowerCase();if(!grouped.has(key))grouped.set(key,{name:b.student.trim(),bookings:[]});grouped.get(key).bookings.push(b)});const students=[...grouped.values()].sort((a,b)=>a.name.localeCompare(b.name));const el=document.getElementById('studentList');if(!students.length){el.innerHTML='<div class="empty">No students yet. Book a class to add a student.</div>';return}el.innerHTML=students.map(({name,bookings})=>{const booked=bookings.filter(b=>b.status!=='cancelled').length;const completed=bookings.filter(b=>b.status==='completed').length;const upcoming=Math.max(0,booked-completed);const cancelled=bookings.filter(b=>b.status==='cancelled').length;return `<div class="student-row"><div><strong>${esc(name)}</strong><small>${booked} booked class${booked===1?'':'es'} · ${cancelled} cancelled</small></div><div class="student-stats"><div><label>Booked Classes</label><strong>${booked}</strong></div><div><label>Completed Hours</label><strong>${completed}</strong></div><div><label>Upcoming Hours</label><strong>${upcoming}</strong></div><div><label>Cancelled Classes</label><strong>${cancelled}</strong></div></div></div>`}).join('')}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function escAttr(s){return esc(s)}function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+timeOptions();render();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA service worker registration failed:', err));
+  });
+}
+</script>
+</body></html>
+
+<style id="soft-today-highlight">
+/* Softer Today highlight */
+.week > .day.active,
+.week > .day.today,
+.calendar-day.today,
+.calendar-day.active {
+  background: color-mix(in srgb, var(--pink) 48%, white) !important;
+  background-color: color-mix(in srgb, var(--pink) 48%, white) !important;
+  color: color-mix(in srgb, var(--pink) 76%, var(--ink)) !important;
+  border-color: color-mix(in srgb, var(--pink) 32%, white) !important;
+}
+</style>
+
+<style id="calendar-header-layer-fix">
+/* Keep the calendar month header above the scrolling time rows. */
+.calendar-card {
+  position: relative;
+}
+.calendar-head {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 30 !important;
+  background: color-mix(in srgb, var(--pink) 34%, white) !important;
+  isolation: isolate;
+}
+.week > .day {
+  top: 61px !important;
+  z-index: 20 !important;
+}
+.week > .day:first-child {
+  z-index: 25 !important;
+}
+.week > .time {
+  z-index: 5 !important;
+  background: color-mix(in srgb, var(--pink) 18%, white) !important;
+}
+</style>
+
+<style id="hide-time-above-month">
+/* Keep the time column from showing through above the month header. */
+.calendar-card {
+  padding-top: 0 !important;
+}
+.calendar-head {
+  margin-top: 0 !important;
+  padding-top: 18px !important;
+  background: color-mix(in srgb, var(--pink) 34%, white) !important;
+  z-index: 40 !important;
+}
+.calendar-head::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: -2px !important;
+  height: 20px !important;
+  background: #fff !important;
+  z-index: -1 !important;
+}
+.week > .time {
+  background: #fff !important;
+}
+</style>
+
+<style id="no-calendar-horizontal-scroll">
+/* All seven days fit inside the calendar; no horizontal scrolling needed. */
+.calendar-card {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.week {
+  min-width: 0 !important;
+  width: 100% !important;
+  grid-template-columns: 58px repeat(7, minmax(0, 1fr)) !important;
+}
+.week > .day,
+.week > .time,
+.week > .slot {
+  min-width: 0 !important;
+}
+.week > .day {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.week > .time {
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+</style>
+
